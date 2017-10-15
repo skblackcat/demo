@@ -24,7 +24,7 @@ def log( message, onlyDebug=False, dateTimeFormat='%Y-%m-%d %H:%M:%S' ):
 def logTime( func, *args, **kwargs ):
 	'''	decorator function to log function time usage
 	'''
-	log( 'Wrapping function {}'.format( func.__name__ ) )
+	log( 'Wrapping function {}'.format( func.__name__ ), onlyDebug=True )
 	def wrapperFunc( *args, **kwargs ):
 		
 		#	get actual function name
@@ -54,7 +54,7 @@ def logTime( func, *args, **kwargs ):
 		
 	return wrapperFunc
 	
-log( 'Initating functions with decorator' )
+log( 'Initating functions with decorator', onlyDebug=True )
 @logTime
 def mySleep( second ):
 	
@@ -64,25 +64,13 @@ def mySleep( second ):
 def multiply( x, y, decimal=2 ):
 	return round( x*y, decimal )
 
-def newFunc( func ):
-	def wrapper():
-		print 'Calling {}'.format( func.__name__ )
-		return func()
-		
-	return wrapper
-
 def add( x,y ):
 	return x+y
-
-@newFunc
-def whatIsYourName():
-	return 'I am Tae.'	
-print whatIsYourName()
 
 log( 'Starting program..' )
 log( 'Multiply result: {}'.format( multiply( 10.53, 1.12345 ) ) )
 mySleep( 3 )
 log( 'Multiply result: {}'.format( multiply( 10.53, 1.12345, decimal=5 ) ) )
 mySleep( 2 )
-		
+log( 'End..' )
 		
